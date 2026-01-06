@@ -4,7 +4,7 @@ use App\Http\Controllers\ApiKeyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\TrackController;
-use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -42,7 +42,7 @@ Route::prefix('tracks')->name('tracks.')->group(function () {
     Route::get('/', [TrackController::class, 'index'])->name('index');
     
     // Routes Admin uniquement - CRUD des musiques
-    Route::middleware([IsAdmin::class])->group(function () {
+    Route::middleware([Admin::class])->group(function () {
         Route::get('create', [TrackController::class, 'create'])->name('create');
         Route::post('/', [TrackController::class, 'store'])->name('store');
         Route::get('{track}/edit', [TrackController::class, 'edit'])->name('edit');
